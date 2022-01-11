@@ -11,7 +11,6 @@ public class Run {
     Scanner scanner = new Scanner(System.in);
     ContactsManager contactManager = new ContactsManager();
     IOFile ioFile = new IOFile();
-    private final String PATH_NAME = "D:\\4. Outlook sync\\OneDrive\\Desktop\\ThiModule2\\Quanlydanhba\\src\\data\\contacts.csv";
 
     public Run() {
     }
@@ -36,6 +35,7 @@ public class Run {
                     System.out.println("Lựa chọn không tồn tại, mời bạn nhập lại !!!");
                     System.out.println("--------------------");
                 }
+                String PATH_NAME = "D:\\4. Outlook sync\\OneDrive\\Desktop\\ThiModule2\\Quanlydanhba\\src\\data\\contacts.csv";
                 switch (choice) {
                     case 1:
                         contactManager.displayAllContact();
@@ -44,7 +44,7 @@ public class Run {
                         contactManager.addNewContact();
                         break;
                     case 3:
-                        System.out.println("▹ Nhập số điện thoại cần sửa:");
+                        System.out.println("Nhập số điện thoại cần sửa:");
                         String phoneEdit = scanner.nextLine();
                         if (phoneEdit.equals("")) {
                             menu();
@@ -53,7 +53,7 @@ public class Run {
                         }
                         break;
                     case 4:
-                        System.out.println("▹ Nhập số điện thoại cần xóa:");
+                        System.out.println("Nhập số điện thoại cần xóa:");
                         String phoneDelete = scanner.nextLine();
                         if (phoneDelete.equals("")) {
                             menu();
@@ -62,18 +62,18 @@ public class Run {
                         }
                         break;
                     case 5:
-                        System.out.println("▹ Nhập từ khóa:");
+                        System.out.println("Nhập từ khóa:");
                         String keyword = scanner.nextLine();
                         contactManager.searchContactByNameOrPhone(keyword);
                         break;
                     case 6:
                         ArrayList<Contact> contactArrayList = ioFile.readFile(PATH_NAME);
                         contactArrayList.forEach(System.out::println);
-                        System.out.println("⛔ Read file successfully !");
+                        System.out.println("Read file successfully!");
                         System.out.println("--------------------");
                         break;
                     case 7:
-                        ioFile.writeFile(contactManager.getContacts(),PATH_NAME);
+                        ioFile.writeFile(contactManager.getContacts(), PATH_NAME);
                         break;
                     case 8:
                         System.exit(8);
@@ -81,7 +81,7 @@ public class Run {
             } while (true);
         } catch (NumberFormatException e) {
             System.out.println();
-            System.out.println("Bạn nhập sai dữ liệu, mời nhập lại !!!");
+            System.out.println("Bạn nhập sai dữ liệu, hãy nhập lại !!!");
             System.out.println("--------------------");
             System.out.println();
             menu();

@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 public class ContactsManager {
     private final String PATH_NAME = "D:\\4. Outlook sync\\OneDrive\\Desktop\\ThiModule2\\Quanlydanhba\\src\\data\\contacts.csv";
-    private IOFile ioFile = new IOFile();
-    private Validate validate = new Validate();
-    private ArrayList<Contact> contacts = ioFile.readFile(PATH_NAME);
+    private final IOFile ioFile = new IOFile();
+    private final Validate validate = new Validate();
+    private final ArrayList<Contact> contacts = ioFile.readFile(PATH_NAME);
     Scanner scanner = new Scanner(System.in);
 
     public ArrayList<Contact> getContacts() {
@@ -32,9 +32,9 @@ public class ContactsManager {
             }
         }
         if (deleteContact != null) {
-            System.out.println("▹ Nhập xác nhận:");
-            System.out.println("▹ Y: Xóa");
-            System.out.println("▹ Ký tự khác: Thoát");
+            System.out.println("Nhập xác nhận:");
+            System.out.println("Y: Xóa");
+            System.out.println("Ký tự khác: Thoát");
             String confirm = scanner.next();
             if (confirm.equalsIgnoreCase("y")) {
                 contacts.remove(deleteContact);
@@ -43,7 +43,7 @@ public class ContactsManager {
                 System.out.println("--------------------");
             }
         } else {
-            System.out.println("Không tìm số điện thoại trong danh ba!");
+            System.out.println("Không tìm được số điện thoại trong danh ba!");
             System.out.println("--------------------");
         }
     }
@@ -57,8 +57,8 @@ public class ContactsManager {
     public Contact creatNewContact(){
         boolean phoneNumberCheck;
         String phoneNumber;
+        System.out.println("Nhập số điện thoại mới");
         do{
-            System.out.println("Nhập số điện thoại mới");
             phoneNumber = scanner.nextLine();
             phoneNumberCheck = validate.validatePhone(phoneNumber);
         }while (!phoneNumberCheck);
@@ -91,15 +91,15 @@ public class ContactsManager {
         }
         if (editContact != null) {
             int index = contacts.indexOf(editContact);
-            System.out.println("▹ Nhập tên nhóm mới:");
+            System.out.println("Nhập tên nhóm mới:");
             editContact.setGroup(scanner.nextLine());
-            System.out.println("▹ Nhập Họ tên mới:");
+            System.out.println("Nhập Họ tên mới:");
             editContact.setName(scanner.nextLine());
-            System.out.println("▹ Nhập giới tính mới:");
+            System.out.println("Nhập giới tính mới:");
             editContact.setGender(scanner.nextLine());
-            System.out.println("▹ Nhập địa chỉ mới:");
+            System.out.println("Nhập địa chỉ mới:");
             editContact.setAddress(scanner.nextLine());
-            System.out.println("▹ Nhập ngày sinh mới:");
+            System.out.println("Nhập ngày sinh mới:");
             editContact.setBirthday(scanner.nextLine());
             boolean emailCheck;
             String email;
@@ -120,18 +120,18 @@ public class ContactsManager {
     }
 
     public void searchContactByNameOrPhone(String keyword) {
-        ArrayList<Contact> contacts = new ArrayList<>();
+        ArrayList<Contact> newContacts = new ArrayList<>();
         for (Contact contact : contacts) {
             if (validate.validatePhoneOrName(keyword, contact.getPhoneNumber()) || validate.validatePhoneOrName(keyword, contact.getName())) {
-                contacts.add(contact);
+                newContacts.add(contact);
             }
         }
-        if (contacts.isEmpty()) {
-            System.out.println("⛔ Không tìm thấy danh bạ với từ khóa trên !");
+        if (newContacts.isEmpty()) {
+            System.out.println("Không tìm thấy danh bạ với từ khóa trên !");
             System.out.println("--------------------");
         } else {
             System.out.println("Danh bạ cần tìm:");
-            contacts.forEach(System.out::println);
+            newContacts.forEach(System.out::println);
             System.out.println("--------------------");
         }
     }
